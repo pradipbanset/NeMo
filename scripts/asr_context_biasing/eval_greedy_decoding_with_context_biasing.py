@@ -204,6 +204,9 @@ def decoding_step(
                     logging.info(f"hyp text: {pred_text}")
                     logging.info(f"ref text: {target_transcripts[batch_idx]}")
             else:
+                print("=====================================")
+                Print(f"---{orch.tensor(preds, device='cpu').unsqueeze(0), asr_model.ctc_decoding.ctc_decoder_predictions_tensor(preds_tensor)}----")
+                print("=====================================")
                 preds_tensor = torch.tensor(preds, device='cpu').unsqueeze(0)
                 if isinstance(asr_model, EncDecHybridRNNTCTCModel):
                     pred_text = asr_model.ctc_decoding.ctc_decoder_predictions_tensor(preds_tensor)[0][0]
