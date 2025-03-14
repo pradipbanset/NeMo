@@ -206,9 +206,9 @@ def decoding_step(
             else:
                 preds_tensor = torch.tensor(preds, device='cpu').unsqueeze(0)
                 if isinstance(asr_model, EncDecHybridRNNTCTCModel):
-                    pred_text = asr_model.ctc_decoding.ctc_decoder_predictions_tensor(preds_tensor)[0][0]
+                    pred_text = asr_model.ctc_decoding.ctc_decoder_predictions_tensor(preds_tensor)[0].text
                 else:
-                    pred_text = asr_model.wer.decoding.ctc_decoder_predictions_tensor(preds_tensor)[0][0]
+                    pred_text = asr_model.wer.decoding.ctc_decoder_predictions_tensor(preds_tensor)[0].text
 
             pred_split_w = pred_text.split()
             target_split_w = target_transcripts[batch_idx].split()
